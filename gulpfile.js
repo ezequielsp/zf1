@@ -21,6 +21,7 @@ if(gutil.env.dev === true) {
 
 var basePaths = {
     src: 'public/src/',
+    assets: 'public/assets/',
     dest: 'public/dist/',
     bower: 'bower_components/'
 };
@@ -49,7 +50,11 @@ var paths = {
 var appFiles = {
     sass: paths.sass.src + '**/*.scss',
     css: paths.css.src + '**/*.css',
-    scripts: [paths.scripts.src + '*.js']
+    scripts: [
+        basePaths.assets + 'jquery.min.js', 
+        basePaths.assets + 'bootstrap.min.js',
+        paths.scripts.src + '*.js'
+    ]
 };
 
 var vendorFiles = {
@@ -97,20 +102,23 @@ gulp.task('css', function() {
                             new gutil.PluginError('CSS', err, {showStack: true});
                         });
     
-    return es.concat(gulp.src('public/src/bootstrap/*.css'), cssFiles)
+    return es.concat(gulp.src(basePaths.assets + 'bootstrap.min.css'), cssFiles)
                .pipe(plugins.concat('style.min.css'))
                .pipe(plugins.cssmin())
                .pipe(gulp.dest(paths.css.dest));
 });
 
 gulp.task('scripts', function(){
-
-    gulp.src(vendorFiles.scripts.concat(appFiles.scripts))
+    gulp.src(appFiles.scripts)
+        .pipe(plugins.uglify())
+        .on('error', function(err){
+            new gutil.PluginError('CSS', err, {showStack: true});
+        })
         .pipe(plugins.concat('app.js'))
         .pipe(gulp.dest(paths.scripts.dest))
-        .pipe(isProduction ? plugins.uglify() : gutil.noop())
+        .pipe(plugins.uglify())
         .pipe(plugins.size())
-        .pipe(gulp.dest(paths.scripts.dest));
+        .pipe(gulp.dest(paths.scripts.dest));      
 
 });
 

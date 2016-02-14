@@ -23,13 +23,12 @@
                   array('conditional' => 'lt IE 9'));
 
         $this->headScript()
-                ->prependFile('/dist/js/app.js')
-                ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js');
+             ->prependFile('/dist/js/app.js');
 
         echo $this->headTitle();
         echo $this->headMeta();
         echo $this->headLink();
-        echo $this->headScript();
+        //echo $this->headScript();
         echo $this->headStyle();
     ?>
   </head>
@@ -37,5 +36,6 @@
     <?php echo $this->layout()->content; ?>
 
     <?php echo $this->partial('modal.phtml'); ?>
+    <script async src="/dist/js/app.js"></script>
   </body>
 </html>
