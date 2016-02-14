@@ -61,5 +61,20 @@ class Home_Form_Albums extends Zend_Form
                 ),
             )
         );
+
+        $this->addDisplayGroup(
+            array(
+                'artist',
+                'title'
+            ),
+            'form_group'
+        );
+        
+        $formGroup = $this->getDisplayGroup('form_group');
+        $formGroup->setDecorators(array(
+                    'FormElements',
+                    'Fieldset',
+                    array('HtmlTag',array('tag'=>'div', 'class' => 'col-md-12'))
+        ));
     }
 }

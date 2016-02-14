@@ -9,7 +9,7 @@ $(function() {
             url: modalBody,
             type: 'GET',
             success: function (data) {
-                $('#myModal .modal-body').html(data);
+                $('#myModal .modal-body .row').html(data);
                 $('#myModal').modal('show');
                 $("#js-btn-save").attr('data-form-success', formSuccess);
                 $("#js-btn-save").attr('data-form-edit', formEdit);
