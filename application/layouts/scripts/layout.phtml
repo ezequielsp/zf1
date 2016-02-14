@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <?php
+        $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8')
+                         ->setName('viewport', 'width=device-width, initial-scale=1.0')
+                         ->appendHttpEquiv('IE=edge,chrome=1', 'X-UA-Compatible');
+
+        $this->headTitle($this->metaTitle)->setSeparator(' - ');
+        $this->headTitle('Zend Framework Tutorial');
+        $this->headLink(
+            array(
+                'rel' => 'icon',
+                'href' => '/favicon.ico'), 'PREPEND')
+             ->prependStylesheet("/dist/css/style.min.css");
+
+         $this->headScript()
+                ->appendFile('https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js',
+                  'text/javascript',
+                  array('conditional' => 'lt IE 9'))
+                ->appendFile('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js',
+                  'text/javascript',
+                  array('conditional' => 'lt IE 9'));
+
+        $this->headScript()
+                ->prependFile('/dist/js/app.js')
+                ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js');
+
+        echo $this->headTitle();
+        echo $this->headMeta();
+        echo $this->headLink();
+        echo $this->headScript();
+        echo $this->headStyle();
+    ?>
+  </head>
+  <body>
+    <?php echo $this->layout()->content; ?>
+
+    <?php echo $this->partial('modal.phtml'); ?>
+  </body>
+</html>

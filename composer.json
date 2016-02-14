@@ -1,0 +1,13 @@
+{
+    "name": "ezequielsp/zf1",
+    "require": {
+        "zendframework/zendframework1": "1.*",
+        "phpunit/phpunit": "4.6.*"
+    },
+    "authors": [
+        {
+            "name": "Ezequiel S. Pereira",
+            "email": "9892345@gmail.com"
+        }
+    ]
+}
