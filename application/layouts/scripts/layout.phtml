@@ -20,22 +20,32 @@
                   array('conditional' => 'lt IE 9'))
                 ->appendFile('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js',
                   'text/javascript',
-                  array('conditional' => 'lt IE 9'));
-
-        $this->headScript()
-             ->prependFile('/dist/js/app.js');
+                  array('conditional' => 'lt IE 9'))
+                ->appendFile('/dist/js/app.js');
 
         echo $this->headTitle();
         echo $this->headMeta();
         echo $this->headLink();
-        //echo $this->headScript();
         echo $this->headStyle();
     ?>
   </head>
   <body>
-    <?php echo $this->layout()->content; ?>
-
-    <?php echo $this->partial('modal.phtml'); ?>
-    <script async src="/dist/js/app.js"></script>
+    <div class="container">
+        <?php echo $this->partial('navbar.phtml'); ?>
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="col-md-2">
+            <?php echo $this->partial('menu.phtml'); ?>
+        </div>
+        <div class="col-md-10">
+            <div id="js-main-content">
+                <!-- Default panel contents -->
+                <?php echo $this->layout()->content; ?>
+            </div>
+        </div>
+    </div> <!-- /container -->
+    <?php 
+      echo $this->partial('modal.phtml'); 
+      echo $this->headScript();
+    ?>
   </body>
 </html>

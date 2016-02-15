@@ -13,7 +13,8 @@ class IndexController extends Zend_Controller_Action
             $this->_helper->layout->disableLayout();
         }
 
-        $this->url = $req->getControllerName() . '/' .
+        $this->controller = $req->getControllerName();
+        $this->url = $this->controller . '/' .
                      $req->getActionName();
     }
 
@@ -22,7 +23,7 @@ class IndexController extends Zend_Controller_Action
         if (!$this->_table) {
             $this->_table = new Home_Model_DbTable_Tables(
                 array(
-                    'name' => 'albums'
+                    'name' => 'albums' //$this->controller
                 )
             );
         }
@@ -40,8 +41,10 @@ class IndexController extends Zend_Controller_Action
     public function getFormData()
     {
         $data = array(
-            'artist' => $this->_form->getValue('artist'),
-            'title'  => $this->_form->getValue('title')
+            'competition_id' => $this->_form->getValue('competition_id'),
+            'league_id'  => $this->_form->getValue('league_id'),
+            'season_id'  => $this->_form->getValue('season_id'),
+            'img'  => $this->_form->getValue('img')
         );
 
         return $data;
@@ -62,7 +65,8 @@ class IndexController extends Zend_Controller_Action
         );
 
         $this->view->assign('paginator', $paginator);
-        $this->view->assign('url', $this->url);
+        $this->view->title      = ucfirst($this->controller);
+        $this->view->controller = $this->controller;
     }
 
     public function addAction()

@@ -3,4 +3,16 @@ $request    = Zend_Controller_Front::getInstance()->getRequest();
 $module     = $request->getModuleName();
 $controller = $request->getControllerName();
 ?>
+<div class="list-group">
+	<button 
+		type="button" 
+		class="js-main-menu list-group-item" 
+		value="/home" 
+		name="index">Home</button>
+	<button 
+		type="button" 
+		class="js-main-menu list-group-item" 
+		value="/admin" 
+		name="index">Admin</button>
+</div>
 
