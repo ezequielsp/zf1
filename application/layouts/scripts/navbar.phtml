@@ -45,10 +45,80 @@ $controller = $request->getControllerName();
                 </ul>
               </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-              <li><a href="../navbar-static-top/">Static top</a></li>
-              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            <ul class="nav pull-right primary">
+              <?php
+                $auth = Zend_Auth::getInstance();
+                if (!is_null($auth->getIdentity())) :
+              ?>
+              <li class="dropdown profile">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="/img/profile-thumb.png" />
+                  <?php echo $auth->getIdentity()->getName(); ?>
+                  <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu secondary "> 
+                      <li class="">
+                          <a href="/auth/logout">
+                          <i class="icon-off"></i> Sair
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+
+      	    <?php else : ?>
+            <form 
+                id="login" 
+                action="/auth/login" 
+                method="post" 
+                role="form" 
+                class="navbar-form navbar-right login-form"
+                enctype="application/x-www-form-urlencoded">
+                  <div class="input-prepend form-group">
+                      <span class="add-on">
+                          <i style="float: left;" class="icon-user"></i>
+                      </span>
+                      <input
+                        type="text" 
+                        class="form-control"
+                        icon="ok"
+                        placeholder="login"
+                        prepend="&lt;i class=&quot;icon-user&quot; style=&quot;float: left;&quot;&gt;&lt;/i&gt;"
+                        autocomplete="off" 
+                        value=""
+                        id="bG9naW5zZW5oYQ"
+                        name="bG9naW5zZW5oYQ"
+                        required
+                      />
+                  </div>
+                  <div class="input-prepend form-group">
+                      <span class="add-on">
+                          <i style="float: left;" class="icon-key"></i>
+                      </span>
+                      <input
+                        type="password"
+                        class="form-control"
+                        icon="icon-key"
+                        placeholder="senha"
+                        prepend="&lt;i class=&quot;icon-key&quot; style=&quot;float: left;&quot;&gt;&lt;/i&gt;"
+                        autocomplete="off"
+                        value=""
+                        id="cGFzc3dvcmRzZW5oYQ"
+                        name="cGFzc3dvcmRzZW5oYQ"
+                        required
+                      />
+                      
+                  </div>
+
+                  <button
+                    class="btn btn-green btn-large login-btn btn-success"
+                    buttons="danger info primary success warning inverse link"
+                    value="Sign In"
+                    type="submit"
+                    id="submit"
+                    name="submit"
+                  >Sign In</button>
+              </form>
+                <?php endif; ?>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

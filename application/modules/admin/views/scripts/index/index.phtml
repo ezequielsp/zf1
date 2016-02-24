@@ -1,4 +1,66 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Index</b> and script/action name <b>index</b></p>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <button 
+            type="button" 
+            class="btn btn-primary btn-lg js-btn-modal" 
+            data-toggle="modal" 
+            data-target="#myModal"
+            data-modal-title="Adicionar <?php echo $this->escape($this->title); ?>"
+            data-modal-body="<?php echo $this->controller; ?>/add"
+            data-form-success="<?php echo $this->controller; ?>"
+        >
+            <i class="icon-plus"></i> Adicionar <?php echo $this->escape($this->title); ?>
+        </button>
+        <?php echo $this->paginator; ?>
+
+        <div class="table-scrollable">
+                <table class="table table-sm table-hover">
+                    <thead class="thead-default">
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th class="text-center">
+                                Nome
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($this->paginator as $row) : ?>
+                        <?php 
+                            $id         = $this->escape($row->id);
+                            $title      = $this->escape($this->title);
+                            $controller = $this->escape($this->controller);
+                            $edit       = "{$controller}" . "/edit/id/{$id}"; 
+                        ?>
+                        <tr>
+                            <td>
+                                <?php echo $row->id; ?>
+                            </td>
+                            <td class="text-center">
+                                    <?php echo $row->artist; ?>
+                            </td>
+                            <td class="text-center">
+                                    <?php echo $row->title; ?>
+                            </td>
+                            <td class="text-center">
+                                <button 
+                                    type="button" 
+                                    class="btn btn-default btn-lg js-btn-modal" 
+                                    data-toggle="modal" 
+                                    data-target="#myModal"
+                                    data-modal-title="Editar <?php echo $title; ?>"
+                                    data-modal-body="<?php echo $edit ?>"
+                                    data-form-success="<?php echo $controller; ?>"
+                                    data-form-edit="true" >
+                                    <span class="">Editar</span>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+        <?php echo $this->paginator; ?>
+    </div>
 </div>

@@ -1,0 +1,46 @@
+<?php if ($this->pageCount): ?>
+<div class="text-center panel-paginator">
+    <ul class="pagination pagination-sm">
+        <?php if (isset($this->previous)): ?>
+            <li>
+                <a aria-label="Previous" class="pag-link" href="<?php echo $this->url(array('page' => $this->first)); ?>">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="disabled">
+                <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+        <?php endif; ?>
+
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <li>
+                    <a class="pag-link" href="<?php echo $this->url(array('page' => $page)); ?>"> 
+                        <?php echo $page; ?> 
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="active">
+                    <a href="#">
+                        <?php echo $page; ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <li>
+                <a aria-label="Next" class="pag-link" href="<?php echo $this->url(array('page' => $this->next)); ?>">
+                <span aria-hidden="true">&raquo;</span>
+                </a> 
+            </li>
+        <?php else: ?>
+            <li class="disabled">
+                <a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a> 
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>
+<?php endif; ?>

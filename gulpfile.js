@@ -2,6 +2,8 @@ var gulp    = require('gulp');
 var es      = require('event-stream');
 var gutil   = require('gulp-util');
 
+require('gulp-task-list')(gulp);
+
 var plugins = require("gulp-load-plugins")({
     pattern: ['gulp-*', 'gulp.*'],
     replaceString: /\bgulp[\-.]/
@@ -73,6 +75,7 @@ var changeEvent = function(evt) {
     gutil.log('File', gutil.colors.cyan(evt.path.replace(new RegExp('/.*(?=/' + basePaths.src + ')/'), '')), 'was', gutil.colors.magenta(evt.type));
 };
 
+// Cria o estilo utilizando o sass
 gulp.task('sass', function(){
 
     var sassFiles = gulp.src(appFiles.sass)
@@ -94,37 +97,43 @@ gulp.task('sass', function(){
         .pipe(gulp.dest(paths.sass.dest));
 });
 
+// Valida css, concatena arquivos e minimifica.
 gulp.task('css', function() {
     var cssFiles = gulp.src(appFiles.css)
-                        .pipe(plugins.csslint())
-                        .pipe(plugins.csslint.reporter())
-                        .on('error', function(err){
+                       .pipe(plugins.size())
+                       .pipe(plugins.csslint())
+                       .pipe(plugins.csslint.reporter())
+                       .on('error', function(err){
                             new gutil.PluginError('CSS', err, {showStack: true});
                         });
     
     return es.concat(gulp.src(basePaths.assets + 'bootstrap.min.css'), cssFiles)
+               .pipe(plugins.size())
                .pipe(plugins.concat('style.min.css'))
                .pipe(plugins.cssmin())
-               .pipe(gulp.dest(paths.css.dest));
+               .pipe(plugins.size())
+               .pipe(gulp.dest(paths.css.dest))
+               .on('error', function(err){
+                            new gutil.PluginError('CSS', err, {showStack: true});
+                        });
 });
 
+// Minimifica arquivos js, concatena e minimifica novamente.
 gulp.task('scripts', function(){
     gulp.src(appFiles.scripts)
-        .pipe(plugins.uglify())
-        .on('error', function(err){
-            new gutil.PluginError('CSS', err, {showStack: true});
-        })
+        .pipe(plugins.size())
         .pipe(plugins.concat('app.js'))
-        .pipe(gulp.dest(paths.scripts.dest))
+        .pipe(plugins.size())
         .pipe(plugins.uglify())
         .pipe(plugins.size())
-        .pipe(gulp.dest(paths.scripts.dest));      
+        .pipe(gulp.dest(paths.scripts.dest))
+        .on('error', function(err){
+            new gutil.PluginError('JS', err, {showStack: true});
+        });      
 
 });
 
-/*
-    Sprite Generator
-*/
+// Gera um sprite e css.
 gulp.task('sprite', function () {
     var spriteData = gulp.src(paths.sprite.src).pipe(plugins.spritesmith({
         imgName: spriteConfig.imgName,
@@ -138,6 +147,7 @@ gulp.task('sprite', function () {
     spriteData.css.pipe(gulp.dest(paths.css.src));
 });
 
+// Monitora a edição de arquivos e imagens.
 gulp.task('watch', ['sprite', 'css', 'scripts'], function(){
     gulp.watch(appFiles.sass, ['sass']).on('change', function(evt) {
         changeEvent(evt);
@@ -150,4 +160,5 @@ gulp.task('watch', ['sprite', 'css', 'scripts'], function(){
     });
 });
 
+// Tarefa padrão, minimifica css e js.
 gulp.task('default', ['css', 'scripts']);

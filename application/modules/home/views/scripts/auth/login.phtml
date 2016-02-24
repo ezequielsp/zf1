@@ -1,0 +1,26 @@
+<?php 
+$auth = Zend_Auth::getInstance();
+if (is_null($auth->getIdentity())) : ?>
+<?php if($this->message): ?>
+    <?php echo $this->message; ?>
+<?php endif; ?>  
+<div class="jumbotron">
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-8">
+                    <section id="main">
+                        <h1>Eightroom</h1>
+                    </section>
+                </div>
+
+                <div class="col-md-4">
+                    <h2>Cadastre-se:</h2>
+                    <section id="main">
+                       <?php echo $this->registerForm; ?>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

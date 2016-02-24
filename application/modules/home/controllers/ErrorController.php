@@ -2,7 +2,13 @@
 
 class ErrorController extends Zend_Controller_Action
 {
-
+    public function init()
+    {
+        if($this->getRequest()->isXmlHttpRequest()) {
+            $this->_helper->layout->disableLayout();
+        }
+    }
+    
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -31,8 +37,17 @@ class ErrorController extends Zend_Controller_Action
         
         // Log exception, if logger available
         if ($log = $this->getLog()) {
-            $log->log($this->view->message, $priority, $errors->exception);
-            $log->log('Request Parameters', $priority, $errors->request->getParams());
+            $log->log(
+                $this->view->message,
+                $priority,
+                $errors->exception
+            );
+            
+            $log->log(
+                'Request Parameters',
+                $priority, 
+                $errors->request->getParams()
+            );
         }
         
         // conditionally display exceptions
@@ -51,6 +66,11 @@ class ErrorController extends Zend_Controller_Action
         }
         $log = $bootstrap->getResource('Log');
         return $log;
+    }
+    
+    public function forbiddenAction()
+    {
+        $this->view->error = $this->getResponse()->setHttpResponseCode(403);
     }
 
 
