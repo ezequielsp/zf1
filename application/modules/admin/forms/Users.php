@@ -78,9 +78,9 @@ class Admin_Form_Users extends Zend_Form
             'class'        => "form-control",
             'decorators'   => $decorators,
             'filters'      => array('StringTrim', 'StripTags'),
-            'label'        => 'Login',
+            'label'        => 'Senha',
             'placeholder'  => "Senha",
-            'required'     => true,
+            //'required'     => true,
             'validators'   => array(
                 array('StringLength', false, array(4, 15)),
             )
@@ -93,7 +93,7 @@ class Admin_Form_Users extends Zend_Form
             'filters'      => array('StringTrim', 'StripTags'),
             'label'        => 'Confirmar Senha',
             'placeholder'  => "Confirmar Senha",
-            'required'     => true,
+            //'required'     => true,
             'validators'   => array(
                 array('StringLength', false, array(4, 15)),
                 array('Identical', false, array('token' => 'passkey')),
@@ -103,9 +103,9 @@ class Admin_Form_Users extends Zend_Form
         //$rolesTable  = new Zend_Db_Table('roles');
         //$rolesRowset = $competitionsTable->fetchAll();
         $roles = array(
-                  '' => 'Selecione um perfil',
-             'admin' => 'Admin',
-             'desen' => 'Desen',
+            ''       => 'Selecione um perfil',
+            'admin'  => 'Admin',
+            'desen'  => 'Desen',
             'editor' => 'Editor'
         );
         //foreach ($rolesRowset as $r) {
@@ -121,10 +121,21 @@ class Admin_Form_Users extends Zend_Form
             'filters'      => array('Int'),
             'decorators'   => $decorators
         ));
+      
+
+        $this->addElement('select', 'active', array(
+            'class'        => 'form-control',
+            'label'        => 'Perfil',
+            //'style'      => 'width:250px',
+            'multiOptions' => array(0 => 'Desativado', 1 => 'Ativo'),
+            'filters'      => array('Int'),
+            'decorators'   => $decorators
+        ));
 
         $this->addDisplayGroup(
             array(
                 'name',
+                'active',
                 'login',
                 'role',
                 'passkey',

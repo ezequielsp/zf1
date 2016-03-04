@@ -44,11 +44,19 @@ class Admin_IndexController extends Zend_Controller_Action
     public function getFormData()
     {
         $data = array(
-            'login'    => $this->_form->getValue('login'),
             'name'     => $this->_form->getValue('name'),
-            'password' => $this->_form->getValue('password'),
-            'confirm'  => $this->_form->getValue('confirm')
+            'active'   => $this->_form->getValue('active'),
+            'login'    => $this->_form->getValue('login'),
+            'role'     => $this->_form->getValue('role')
         );
+
+        if ($this->_form->getValue('passkey')) {
+            $data['password'] = $this->_form->getValue('passkey');
+        }
+
+        if ($this->_form->getValue('confirm')) {
+            $data['confirm'] = $this->_form->getValue('confirm');
+        }
 
         return $data;
     }
@@ -99,8 +107,7 @@ class Admin_IndexController extends Zend_Controller_Action
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
                 $id   = (int)$form->getValue('id');
-                $data = $this->getFormData($form);
-
+                $data = $this->getFormData();
                 $this->getTable()->update($data, 'id = '. $id);
             } else {
                 $form->populate($formData);
