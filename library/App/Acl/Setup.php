@@ -31,7 +31,7 @@ class App_Acl_Setup {
     {
         $this->_acl = new Zend_Acl();
         $this->_initialize();
-    }    
+    }
 
     protected function _initialize()
     {
@@ -42,15 +42,16 @@ class App_Acl_Setup {
     }
 
     protected function _setupRoles()
-    {     
+    {
         $this->_acl->addRole(new Zend_Acl_Role('guest'));
         $this->_acl->addRole(new Zend_Acl_Role('editor'));
         $this->_acl->addRole(new Zend_Acl_Role('desen'));
+        $this->_acl->addRole(new Zend_Acl_Role('admin'));
     }
 
     protected function _setupResources()
-    {    
-        $this->_acl->addResource(new Zend_Acl_Resource('home_auth', 
+    {
+        $this->_acl->addResource(new Zend_Acl_Resource('home_auth',
             array('index', 'login', 'logout', 'register')));
         
         $this->_acl->addResource(new Zend_Acl_Resource('home_error',
@@ -63,14 +64,15 @@ class App_Acl_Setup {
             array('index', 'add', 'edit', 'delete')));
     }
 
-    protected function _setupPrivileges() 
-    {    
+    protected function _setupPrivileges()
+    {
         $this->_acl->allow('desen');
+        $this->_acl->allow('admin');
         
-        $this->_acl->allow(null, 'home_auth',  
+        $this->_acl->allow(null, 'home_auth',
             array('index', 'login', 'logout', 'register'));
         
-        $this->_acl->allow(null, 'home_error', 
+        $this->_acl->allow(null, 'home_error',
             array('index', 'error', 'forbidden'));
         
         $this->_acl->allow(null, 'home_index',
@@ -80,7 +82,7 @@ class App_Acl_Setup {
             array('index', 'add', 'edit', 'delete'));
 
         
-        $this->_acl->allow(null);
+        //$this->_acl->allow(null);
     }
 
     protected function _saveAcl()

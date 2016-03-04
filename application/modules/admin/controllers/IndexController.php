@@ -13,9 +13,12 @@ class Admin_IndexController extends Zend_Controller_Action
             $this->_helper->layout->disableLayout();
         }
 
+        $this->module     = $req->getModuleName();
         $this->controller = $req->getControllerName();
-        $this->url = $this->controller . '/' .
-                     $req->getActionName();
+        $this->url        = $this->module . '/' .
+                                $this->controller . '/' .
+                                $req->getActionName();
+
     }
 
     public function getTable()
@@ -23,7 +26,7 @@ class Admin_IndexController extends Zend_Controller_Action
         if (!$this->_table) {
             $this->_table = new Home_Model_DbTable_Tables(
                 array(
-                    'name' => 'albums' //$this->controller
+                    'name' => 'users' //$this->controller
                 )
             );
         }
@@ -33,7 +36,7 @@ class Admin_IndexController extends Zend_Controller_Action
     public function getForm()
     {
         if (!$this->_form) {
-            $this->_form = new Home_Form_Albums();
+            $this->_form = new Admin_Form_Users();
         }
         return $this->_form;
     }
@@ -41,10 +44,10 @@ class Admin_IndexController extends Zend_Controller_Action
     public function getFormData()
     {
         $data = array(
-            'competition_id' => $this->_form->getValue('competition_id'),
-            'league_id'  => $this->_form->getValue('league_id'),
-            'season_id'  => $this->_form->getValue('season_id'),
-            'img'  => $this->_form->getValue('img')
+            'login'    => $this->_form->getValue('login'),
+            'name'     => $this->_form->getValue('name'),
+            'password' => $this->_form->getValue('password'),
+            'confirm'  => $this->_form->getValue('confirm')
         );
 
         return $data;
@@ -65,7 +68,8 @@ class Admin_IndexController extends Zend_Controller_Action
         );
 
         $this->view->assign('paginator', $paginator);
-        $this->view->title      = ucfirst($this->controller);
+        $this->view->title      = $this->module . ' ' . ucfirst($this->controller);
+        $this->view->module     = $this->module;
         $this->view->controller = $this->controller;
     }
 
@@ -130,4 +134,3 @@ class Admin_IndexController extends Zend_Controller_Action
         }
     }
 }
-

@@ -13,9 +13,11 @@ class IndexController extends Zend_Controller_Action
             $this->_helper->layout->disableLayout();
         }
 
+        $this->module     = $req->getModuleName();
         $this->controller = $req->getControllerName();
-        $this->url = $this->controller . '/' .
-                     $req->getActionName();
+        $this->url        = $this->module . '/' .
+                                $this->controller . '/' .
+                                $req->getActionName();
     }
 
     public function getTable()
@@ -41,10 +43,8 @@ class IndexController extends Zend_Controller_Action
     public function getFormData()
     {
         $data = array(
-            'competition_id' => $this->_form->getValue('competition_id'),
-            'league_id'  => $this->_form->getValue('league_id'),
-            'season_id'  => $this->_form->getValue('season_id'),
-            'img'  => $this->_form->getValue('img')
+            'artist' => $this->_form->getValue('artist'),
+            'title'  => $this->_form->getValue('title')
         );
 
         return $data;

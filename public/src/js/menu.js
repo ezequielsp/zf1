@@ -27,6 +27,16 @@ var menuClicked = function(self) {
             $(self).on('click', function() {
                 menuClicked(this);
             });
+
+            switch(name) {
+                case "controllername":
+                    $.getScript( "/dist/js/controllername.js" );
+                    break;
+                default:
+            }
+
+
+            $.getScript( "/src/js/modal.js" );
         }
     });
 };

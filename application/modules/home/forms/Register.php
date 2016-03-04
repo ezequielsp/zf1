@@ -30,7 +30,7 @@ class Home_Form_Register extends Zend_Form
                 array('StringLength', false, array(4, 50)),
                 array('Db_NoRecordExists', 
                         false, array(
-                                'schema' => 'eightroom',
+                               // 'schema' => '8room',
                                 'table' => 'users',
                                 'field' => 'login',
                                 'exclude'   => array(

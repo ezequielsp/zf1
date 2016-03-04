@@ -26,12 +26,13 @@ class AuthController extends Zend_Controller_Action
             $psd    = isset($data['passkey']) ? $data['passkey'] : null;
             $pwd    = isset($data['cGFzc3dvcmRzZW5oYQ']) ? $data['cGFzc3dvcmRzZW5oYQ'] : $psd;
             $name   = isset($data['name']) ? $data['name'] : null; 
+            
             if(isset($name)) {
                 $data = array(
-                    'login'     => $login,
-                    'name'      => $name,
-                    'password'  => SHA1($pwd),
-                    'timestamp' => time()
+                    'login'      => $login,
+                    'name'       => $name,
+                    'password'   => SHA1($pwd),
+                    'created_at' => time()
                 );
                 $db = new Home_Model_DbTable_Users();
                 $db->save($data);
@@ -68,8 +69,6 @@ class AuthController extends Zend_Controller_Action
 
     public function registerAction()
     {
-
-
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->messages = $this->_flashMessenger->getMessages();
         $form = new Home_Form_Register();
@@ -81,12 +80,12 @@ class AuthController extends Zend_Controller_Action
             if ($form->isValid($dataPost)) {
                 $login = $form->getValue('login');
                 $name  = $form->getValue('name');
-                $pwd   = $form->getValue('passkey');               
+                $pwd   = $form->getValue('passkey');
                 $data  = array(
-                    'login'     => $login,
-                    'name'      => $name,
-                    'password'  => SHA1($pwd),
-                    'timestamp' => time()
+                    'login'      => $login,
+                    'name'       => $name,
+                    'password'   => SHA1($pwd),
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 $db = new Home_Model_DbTable_Users();
                 $db->save($data);
@@ -97,7 +96,7 @@ class AuthController extends Zend_Controller_Action
                         'controller' => 'index', 'action' => 'index'), null, true);
                 } catch (Exception $e) {
                     $this->view->message = $e->getMessage();
-                }              
+                }
             } else {
                 //Formulário preenchido de forma incorreta
                 $form->populate($dataPost);
