@@ -2,6 +2,7 @@
 <html lang="pt-BR">
   <head>
     <?php
+        $auth = Zend_Auth::getInstance()->getIdentity();
         $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8')
                          ->setName('viewport', 'width=device-width, initial-scale=1.0')
                          ->appendHttpEquiv('IE=edge,chrome=1', 'X-UA-Compatible');
@@ -33,10 +34,13 @@
     <div class="container">
         <?php echo $this->partial('navbar.phtml'); ?>
         <!-- Main component for a primary marketing message or call to action -->
-        <div class="col-md-2">
+        <?php if(!is_null($auth)): ?>
+          <div class="col-md-2">
             <?php echo $this->partial('menu.phtml'); ?>
-        </div>
-        <div class="col-md-10">
+          </div>
+        <?php endif; ?>
+        
+        <div class="<?php echo (is_null($auth)) ? 'col-md-12' : 'col-md-10'; ?>">
             <div id="js-main-content">
                 <!-- Default panel contents -->
                 <?php echo $this->layout()->content; ?>
