@@ -47,5 +47,10 @@
       echo $this->partial('modal.phtml'); 
       echo $this->headScript();
     ?>
+    <script>
+$(function(){
+    $('*[name=jsdatetime]').appendDtpicker({"inline": true});
+});
+</script>
   </body>
 </html>

@@ -13,6 +13,9 @@ $(function() {
                 $('#myModal').modal('show');
                 $("#js-btn-save").attr('data-form-success', formSuccess);
                 $("#js-btn-save").attr('data-form-edit', formEdit);
+            },
+            complete: function(){
+                $.getScript( "/src/js/config.js" );
             }
         });
     });
@@ -40,6 +43,7 @@ $(function() {
             },
             complete: function(){
                 $btn.button('reset');
+                $.getScript( "/src/js/config.js" );
             }
 		});
     });    

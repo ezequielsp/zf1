@@ -27,6 +27,8 @@ var menuClicked = function(self) {
             $(self).on('click', function() {
                 menuClicked(this);
             });
+
+            $.getScript( "/src/js/config.js" );
         }
     });
 };

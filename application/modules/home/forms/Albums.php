@@ -62,10 +62,33 @@ class Home_Form_Albums extends Zend_Form
             )
         );
 
+        $this->addElement('select', 'state', array(
+            'class'        => 'form-control js-example-basic-multiple',
+            'decorators'   => $decorators,
+            'label'        => "Estado",
+            'multiple'     => "multiple",
+            'multiOptions' => array(
+                ''   => "Escolha um Estado",
+                'rs' => "Rio Grande do Sul",
+                'sc' => "Santa Catarina"),
+            'validators'   => array('NotEmpty'),
+            'required'     => true,
+            'style'        => 'width:300px;'
+        ));
+
+        $this->addElement('text', 'data', array(
+            'decorators'  => $decorators,
+            'name'       => 'jsdatetime',
+            'filters'    => array('StringTrim', 'StripTags'),
+            'required'   => true,
+        ));
+
         $this->addDisplayGroup(
             array(
                 'artist',
-                'title'
+                'title',
+                'data',
+                'state'
             ),
             'form_group'
         );
