@@ -55,6 +55,8 @@ var appFiles = {
     scripts: [
         basePaths.assets + 'jquery.min.js', 
         basePaths.assets + 'bootstrap.min.js',
+        basePaths.assets + 'jquery.simple-dtpicker.js',
+        basePaths.assets + 'select2.min.js',
         paths.scripts.src + '*.js'
     ]
 };
