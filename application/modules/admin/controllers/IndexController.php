@@ -15,8 +15,7 @@ class Admin_IndexController extends Zend_Controller_Action
 
         $this->module     = $req->getModuleName();
         $this->controller = $req->getControllerName();
-        $this->url        = $this->module . '/' .
-                                $this->controller . '/' .
+        $this->url        = $this->controller . '/' .
                                 $req->getActionName();
 
     }

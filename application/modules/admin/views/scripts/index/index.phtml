@@ -2,7 +2,6 @@
 $title      = $this->escape($this->title);
 $module     = $this->escape($this->module);
 $controller = $this->escape($this->controller);
-$resource   = $module . '/' . $controller;
 ?>
 <div class="row">
     <div class="col-xs-12 col-md-12">
@@ -12,8 +11,8 @@ $resource   = $module . '/' . $controller;
             data-toggle="modal" 
             data-target="#myModal"
             data-modal-title="Adicionar <?php echo $title; ?>"
-            data-modal-body="<?php echo $resource; ?>/add"
-            data-form-success="<?php echo $resource; ?>"
+            data-modal-body="<?php echo $controller; ?>/add"
+            data-form-success="<?php echo $controller; ?>"
         >
             <i class="icon-plus"></i> Adicionar <?php echo $title; ?>
         </button>
@@ -42,7 +41,7 @@ $resource   = $module . '/' . $controller;
                     <?php foreach ($this->paginator as $row) : ?>
                         <?php 
                             $id   = $this->escape($row->id);
-                            $edit = "{$resource}" . "/edit/id/{$id}"; 
+                            $edit = "{$controller}" . "/edit/id/{$id}"; 
                         ?>
                         <tr>
                             <td>
@@ -65,7 +64,7 @@ $resource   = $module . '/' . $controller;
                                     data-target="#myModal"
                                     data-modal-title="Editar <?php echo $title; ?>"
                                     data-modal-body="<?php echo $edit ?>"
-                                    data-form-success="<?php echo $resource; ?>"
+                                    data-form-success="<?php echo $controller; ?>"
                                     data-form-edit="true" >
                                     <span class="">Editar</span>
                                 </button>
