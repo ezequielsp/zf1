@@ -6,8 +6,8 @@
             data-toggle="modal" 
             data-target="#myModal"
             data-modal-title="Adicionar <?php echo $this->escape($this->title); ?>"
-            data-modal-body="<?php echo $this->controller; ?>/add"
-            data-form-success="<?php echo $this->controller; ?>"
+            data-modal-body="<?php echo $this->module .'/'. $this->controller; ?>/add"
+            data-form-success="<?php echo $this->module .'/'.$this->controller; ?>"
         >
             <i class="icon-plus"></i> Adicionar <?php echo $this->escape($this->title); ?>
         </button>

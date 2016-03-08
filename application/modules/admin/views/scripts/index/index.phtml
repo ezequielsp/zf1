@@ -1,3 +1,9 @@
+<?php
+$title      = $this->escape($this->title);
+$module     = $this->escape($this->module);
+$controller = $this->escape($this->controller);
+$resource   = $module . '/' . $controller;
+?>
 <div class="row">
     <div class="col-xs-12 col-md-12">
         <button 
@@ -5,11 +11,11 @@
             class="btn btn-primary btn-lg js-btn-modal" 
             data-toggle="modal" 
             data-target="#myModal"
-            data-modal-title="Adicionar <?php echo $this->escape($this->title); ?>"
-            data-modal-body="<?php echo $this->controller; ?>/add"
-            data-form-success="<?php echo $this->controller; ?>"
+            data-modal-title="Adicionar <?php echo $title; ?>"
+            data-modal-body="<?php echo $resource; ?>/add"
+            data-form-success="<?php echo $resource; ?>"
         >
-            <i class="icon-plus"></i> Adicionar <?php echo $this->escape($this->title); ?>
+            <i class="icon-plus"></i> Adicionar <?php echo $title; ?>
         </button>
         <?php echo $this->paginator; ?>
 
@@ -23,26 +29,33 @@
                             <th class="text-center">
                                 Nome
                             </th>
+                            <th class="text-center">
+                                Login
+                            </th>
+                            <th class="text-center">
+                                Perfil
+                            </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($this->paginator as $row) : ?>
                         <?php 
-                            $id         = $this->escape($row->id);
-                            $title      = $this->escape($this->title);
-                            $controller = $this->escape($this->controller);
-                            $edit       = "{$controller}" . "/edit/id/{$id}"; 
+                            $id   = $this->escape($row->id);
+                            $edit = "{$resource}" . "/edit/id/{$id}"; 
                         ?>
                         <tr>
                             <td>
                                 <?php echo $row->id; ?>
                             </td>
                             <td class="text-center">
-                                    <?php echo $row->artist; ?>
+                                <?php echo $row->name; ?>
                             </td>
                             <td class="text-center">
-                                    <?php echo $row->title; ?>
+                                <?php echo $row->login; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $row->role; ?>
                             </td>
                             <td class="text-center">
                                 <button 
@@ -52,7 +65,7 @@
                                     data-target="#myModal"
                                     data-modal-title="Editar <?php echo $title; ?>"
                                     data-modal-body="<?php echo $edit ?>"
-                                    data-form-success="<?php echo $controller; ?>"
+                                    data-form-success="<?php echo $resource; ?>"
                                     data-form-edit="true" >
                                     <span class="">Editar</span>
                                 </button>

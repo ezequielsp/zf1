@@ -52,14 +52,14 @@ $controller = $request->getControllerName();
               ?>
               <li class="dropdown profile">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="/img/profile-thumb.png" />
+                  <i class="glyphicon glyphicon-user"></i>
                   <?php echo $auth->getIdentity()->getName(); ?>
                   <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu secondary "> 
                       <li class="">
                           <a href="/auth/logout">
-                          <i class="icon-off"></i> Sair
+                          <i class="glyphicon glyphicon-off"></i> Sair
                           </a>
                       </li>
                   </ul>
@@ -68,21 +68,18 @@ $controller = $request->getControllerName();
       	    <?php else : ?>
             <form 
                 id="login" 
-                action="/auth/login" 
+                action="/login" 
                 method="post" 
                 role="form" 
                 class="navbar-form navbar-right login-form"
                 enctype="application/x-www-form-urlencoded">
                   <div class="input-prepend form-group">
-                      <span class="add-on">
-                          <i style="float: left;" class="icon-user"></i>
-                      </span>
                       <input
                         type="text" 
                         class="form-control"
                         icon="ok"
                         placeholder="login"
-                        prepend="&lt;i class=&quot;icon-user&quot; style=&quot;float: left;&quot;&gt;&lt;/i&gt;"
+                        prepend="&lt;i class=&quot;glyphicon glyphicon-user&quot; style=&quot;float: left;&quot;&gt;&lt;/i&gt;"
                         autocomplete="off" 
                         value=""
                         id="bG9naW5zZW5oYQ"
@@ -91,9 +88,6 @@ $controller = $request->getControllerName();
                       />
                   </div>
                   <div class="input-prepend form-group">
-                      <span class="add-on">
-                          <i style="float: left;" class="icon-key"></i>
-                      </span>
                       <input
                         type="password"
                         class="form-control"

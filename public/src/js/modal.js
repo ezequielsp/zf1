@@ -27,15 +27,14 @@ $(function() {
         	url         = form.attr('action'),
         	formData    = form.serialize(),
         	formSuccess = $(this).data('form-success'),
-        	formEdit = $(this).data('form-edit');
+        	formEdit    = $(this).data('form-edit');
 
         $btn.button('loading');
-
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: formData,
-			success: function () {
+			success: function (data) {
 				location.reload();
             },
             error: function(){

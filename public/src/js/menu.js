@@ -29,6 +29,7 @@ var menuClicked = function(self) {
             });
 
             $.getScript( "/src/js/config.js" );
+            $.getScript( "/src/js/modal.js" );
         }
     });
 };
