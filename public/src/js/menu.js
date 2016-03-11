@@ -3,7 +3,7 @@ var menuClicked = function(self) {
     $(self).parent().addClass('active');
     //$(self).find('i').addClass('icon-white');
 
-    var menu = $(self).attr("value");
+    var menu = $(self).data("value");
     var name = $(self).attr("name");
     $(self).off('click');
     

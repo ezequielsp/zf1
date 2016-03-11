@@ -3,16 +3,100 @@ $request    = Zend_Controller_Front::getInstance()->getRequest();
 $module     = $request->getModuleName();
 $controller = $request->getControllerName();
 ?>
-<div class="list-group">
-	<button 
-		type="button" 
-		class="js-main-menu list-group-item" 
-		value="/home" 
-		name="index">Home</button>
-	<button 
-		type="button" 
-		class="js-main-menu list-group-item" 
-		value="/admin" 
-		name="index">Admin</button>
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                <span class="glyphicon glyphicon-folder-close"></span> Conteúdo
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="list-group">
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/home" 
+					name="index">Home</button>
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/admin" 
+					name="index">Admin</button>
+			</div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                	<span class="glyphicon glyphicon-th"></span> 
+                	Modules
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="list-group">
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/home" 
+					name="index">Home</button>
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/admin" 
+					name="index">Admin</button>
+			</div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                	<span class="glyphicon glyphicon-user"></span>
+                	Account
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+            <div class="list-group">
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/home" 
+					name="index">Home</button>
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/admin" 
+					name="index">Admin</button>
+			</div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                	<span class="glyphicon glyphicon-user"></span>
+                	Usuários
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse">
+            <div class="list-group">
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/home" 
+					name="index">Home</button>
+				<button 
+					type="button" 
+					class="js-main-menu list-group-item" 
+					data-value="/admin" 
+					name="index">Admin</button>
+			</div>
+        </div>
+    </div>
 </div>
-

@@ -8,7 +8,7 @@
                          ->appendHttpEquiv('IE=edge,chrome=1', 'X-UA-Compatible');
 
         $this->headTitle($this->metaTitle)->setSeparator(' - ');
-        $this->headTitle('Zend Framework Tutorial');
+        $this->headTitle('ZF1');
         $this->headLink(
             array(
                 'rel' => 'icon',
@@ -51,10 +51,5 @@
       echo $this->partial('modal.phtml'); 
       echo $this->headScript();
     ?>
-    <script>
-$(function(){
-    $('*[name=jsdatetime]').appendDtpicker({"inline": true});
-});
-</script>
   </body>
 </html>
